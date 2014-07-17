@@ -1,4 +1,5 @@
 " Vundle
+" install with: git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -30,6 +31,8 @@ Plugin 'nelstrom/vim-visual-star-search'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'ervandew/supertab'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'jonathanfilip/vim-lucius'
+Plugin 'ciaranm/inkpot'
 
 " Vundle finish
 call vundle#end()
@@ -103,7 +106,7 @@ elseif &term=='xterm-256color' || &term=='rxvt-unicode-256color'
 "    let g:solarized_termcolors=256
 "    color solarized
 "    color lucius
-    color zenburn
+    color jellybeans
 else
     color elflord
 endif
@@ -217,3 +220,7 @@ runtime! macros/matchit.vim
 let g:airline#extensions#tabline#enabled = 1
 
 set hls
+
+" some custom commands/macros for Ag
+command! -nargs=+ Agweb :Ag -G '.*\.js$|.*\.ts$|.*\.html$' <args>
+command! -nargs=+ Agcs :Ag -G '.*\.cs$' <args>
