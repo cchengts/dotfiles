@@ -33,6 +33,8 @@ Plugin 'ervandew/supertab'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'jonathanfilip/vim-lucius'
 Plugin 'ciaranm/inkpot'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'gregsexton/gitv'
 
 " Vundle finish
 call vundle#end()
