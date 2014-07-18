@@ -35,6 +35,7 @@ Plugin 'jonathanfilip/vim-lucius'
 Plugin 'ciaranm/inkpot'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'gregsexton/gitv'
+Plugin 'Valloric/YouCompleteMe'
 
 " Vundle finish
 call vundle#end()
