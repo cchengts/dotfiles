@@ -19,6 +19,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'bling/vim-airline'
 Plugin 'sirver/ultisnips'
+Plugin 'honza/vim-snippets'
 " Plugin 'file:///home/gmarik/path/to/plugin'
 Plugin 'mattn/emmet-vim'
 Plugin 'taglist.vim'
@@ -36,6 +37,11 @@ Plugin 'ciaranm/inkpot'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'gregsexton/gitv'
 Plugin 'Valloric/YouCompleteMe'
+" Adds better support for Javascript in tagbar. Additional steps: 
+"   'npm install' in .vim/bundle/tern_for_vim
+"   npm install -g git://github.com/ramitos/jsctags.git
+Plugin 'marijnh/tern_for_vim'
+Plugin 'JavaScript-Indent'
 
 " Vundle finish
 call vundle#end()
@@ -111,7 +117,8 @@ elseif &term=='xterm-256color' || &term=='rxvt-unicode-256color'
 "    color lucius
     color jellybeans
 else
-    color elflord
+    set bg=dark
+    color lucius
 endif
 " supertab plugin
 let g:SuperTabMappingForward = '<c-space>'
@@ -227,3 +234,10 @@ set hls
 " some custom commands/macros for Ag
 command! -nargs=+ Agweb :Ag -G '.*\.js$|.*\.ts$|.*\.html$' <args>
 command! -nargs=+ Agcs :Ag -G '.*\.cs$' <args>
+
+" UntiSnips
+" <tab> is already used by YCM
+let g:UltiSnipsExpandTrigger="<c-j>"
+
+" YouCompleteMe
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
