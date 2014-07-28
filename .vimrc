@@ -36,12 +36,13 @@ Plugin 'jonathanfilip/vim-lucius'
 Plugin 'ciaranm/inkpot'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'gregsexton/gitv'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 " Adds better support for Javascript in tagbar. Additional steps: 
 "   'npm install' in .vim/bundle/tern_for_vim
 "   npm install -g git://github.com/ramitos/jsctags.git
 Plugin 'marijnh/tern_for_vim'
 Plugin 'JavaScript-Indent'
+Plugin 'lokaltog/vim-easymotion'
 
 " Vundle finish
 call vundle#end()
