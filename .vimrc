@@ -34,7 +34,8 @@ Plugin 'ervandew/supertab'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'jonathanfilip/vim-lucius'
 Plugin 'ciaranm/inkpot'
-Plugin 'airblade/vim-gitgutter'
+"gitgutter runs a script for every cursor move
+"Plugin 'airblade/vim-gitgutter'
 Plugin 'gregsexton/gitv'
 "Plugin 'Valloric/YouCompleteMe'
 " Adds better support for Javascript in tagbar. Additional steps: 
@@ -101,7 +102,9 @@ set pastetoggle=<F12>
 set cino=:0.5s,=0.5s,g0.5s,h0.5s,i2s,u0
 set backspace=indent,eol,start
 "set list
-set listchars=trail:·,precedes:«,extends:»,eol:↲,tab:▸\ 
+if !has('win32')
+    set listchars=trail:·,precedes:«,extends:»,eol:↲,tab:▸\ 
+endif
 "set textwidth=76
 " source $RUNTIME/mswin.vim " Enable Windows like shortcuts
 " behave mswin " Enable Windows like mouse/key behavior
@@ -117,9 +120,18 @@ elseif &term=='xterm-256color' || &term=='rxvt-unicode-256color'
 "    color solarized
 "    color lucius
     color jellybeans
+elseif &term=='win32'
+    color default
 else
     set bg=dark
     color lucius
+endif
+if has('win32') && !has('gui_running') && !empty($CONEMUBUILD)
+    set term=xterm
+    set t_Co=256
+    let &t_AB="\e[48;5;%dm"
+    let &t_AF="\e[38;5;%dm"
+    color jellybeans
 endif
 " supertab plugin
 let g:SuperTabMappingForward = '<c-space>'
