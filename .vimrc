@@ -30,7 +30,8 @@ Plugin 'Shougo/unite.vim'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'Quramy/tsuquyomi'
-Plugin 'clausreinke/typescript-tools.vim'
+" typescript-tools not working
+"Plugin 'clausreinke/typescript-tools.vim'
 Plugin 'nelstrom/vim-visual-star-search'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'ervandew/supertab'
@@ -259,4 +260,4 @@ let g:UltiSnipsExpandTrigger="<c-j>"
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 
 " typescript-tools.vim
-let g:TSS = ['tsserver']
+"let g:TSS = ['tsserver']
