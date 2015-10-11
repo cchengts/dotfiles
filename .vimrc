@@ -72,6 +72,10 @@ set showtabline=2
 set nobackup
 " set rnu
 set number " to display absolute line numbers
+set cursorline
+set wildmenu
+set lazyredraw
+set showmatch
 set ruler
 set colorcolumn=80,+0
 set shellslash
@@ -95,6 +99,7 @@ set splitbelow
 set cmdheight=2
 set hidden
 set laststatus=2
+set incsearch
 set hlsearch
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*        " Linux/MacOSX
 
