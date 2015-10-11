@@ -7,6 +7,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " Vundle plugins
+Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-fugitive'
 Plugin 'L9'
 "Plugin 'git://git.wincent.com/command-t.git'
@@ -51,7 +52,6 @@ Plugin 'lokaltog/vim-easymotion'
 
 " Vundle finish
 call vundle#end()
-filetype plugin indent on
 "
 " Brief help
 " :PluginList          - list configured plugins
@@ -64,35 +64,19 @@ filetype plugin indent on
 
 
 " My VIM settings
-set nocp
-if &term =~ "rxvt"
-    if has("terminfo")
-        set t_Co=8
-        set t_Sf=[3%p1%dm
-        set t_Sb=[4%p1%dm
-    else
-        set t_Co=8
-        set t_Sf=[3%dm
-        set t_Sb=[4%dm
-    endif
-endif
-set t_Co=256
-"set t_AB=[48;5;%dm
-"set t_AF=[38;5;%dm
 syntax on
+filetype plugin indent on
+runtime! macros/matchit.vim
 set mouse=a
 set showtabline=2
 set nobackup
 " set rnu
-set nu " to display absolute line numbers
+set number " to display absolute line numbers
 set ruler
-set cc=80,+0
-filetype plugin on
+set colorcolumn=80,+0
 set shellslash
-filetype indent on
 let g:texflavor='latex'
 set winaltkeys=no
-"let Tlist_Ctags_Cmd="C:/Users/cheng/vimfiles/ctags.exe"
 set smartindent
 set autoindent
 set tabstop=4
@@ -105,19 +89,45 @@ set complete=.,w,b,u,t,i
 set pastetoggle=<F12>
 set cino=:0.5s,=0.5s,g0.5s,h0.5s,i2s,u0
 set backspace=indent,eol,start
-"set list
+"set textwidth=76
+set completeopt=longest,menuone,preview
+set splitbelow
+set cmdheight=2
+set hidden
+set laststatus=2
+set hlsearch
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*        " Linux/MacOSX
+
+set nolist
 if !has('win32')
     set listchars=trail:·,precedes:«,extends:»,eol:↲,tab:▸\ 
 endif
-"set textwidth=76
-" source $RUNTIME/mswin.vim " Enable Windows like shortcuts
-" behave mswin " Enable Windows like mouse/key behavior
-" set term=xterm-255color
-" if &term=='builtin_gui'
+
+
+" SETUP COLORS
+set t_Co=256
+if &term =~ "rxvt"
+    if has("terminfo")
+        set t_Co=8
+        set t_Sf=[3%p1%dm
+        set t_Sb=[4%p1%dm
+    else
+        set t_Co=8
+        set t_Sf=[3%dm
+        set t_Sb=[4%dm
+    endif
+elseif has('win32') && !has('gui_running') && !empty($CONEMUBUILD)
+    " enable 256 colors in conemu console
+    set term=xterm
+    set t_Co=256
+    let &t_AB="\e[48;5;%dm"
+    let &t_AF="\e[38;5;%dm"
+    color jellybeans
+endif
 if has("gui_running")
 "    color solarized
-    color desert
 "    set bg=dark
+    color desert
 elseif &term=='xterm-256color' || &term=='rxvt-unicode-256color'
 "    set bg=dark
 "    let g:solarized_termcolors=256
@@ -130,134 +140,35 @@ else
     set bg=dark
     color lucius
 endif
-if has('win32') && !has('gui_running') && !empty($CONEMUBUILD)
-    set term=xterm
-    set t_Co=256
-    let &t_AB="\e[48;5;%dm"
-    let &t_AF="\e[38;5;%dm"
-    color jellybeans
-endif
-" supertab plugin
+
+
+" PLUGIN: supertab
 let g:SuperTabMappingForward = '<c-space>'
 let g:SuperTabMappingBackward = '<s-c-space>'
 
-
-" pathogen
-"execute pathogen#infect()
-
-" Omnisharp
-" OmniSharp won't work without this setting
-filetype plugin on
-
-"This is the default value, setting it isn't actually necessary
-let g:OmniSharp_host = "http://localhost:2000"
-
-"Set the type lookup function to use the preview window instead of the status line
-"let g:OmniSharp_typeLookupInPreview = 1
-
-"Showmatch significantly slows down omnicomplete
-"when the first match contains parentheses.
-set noshowmatch
-"Set autocomplete function to OmniSharp (if not using YouCompleteMe completion plugin)
-autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
-
-"Super tab settings
-"let g:SuperTabDefaultCompletionType = 'context'
-"let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
-"let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>","&completefunc:<c-x><c-n>"]
-"let g:SuperTabClosePreviewOnPopupClose = 1
-
-"don't autoselect first item in omnicomplete, show if only one item (for preview)
-"remove preview if you don't want to see any documentation whatsoever.
-set completeopt=longest,menuone,preview
-" Fetch full documentation during omnicomplete requests. 
-" There is a performance penalty with this (especially on Mono)
-" By default, only Type/Method signatures are fetched. Full documentation can still be fetched when
-" you need it with the :OmniSharpDocumentation command.
-" let g:omnicomplete_fetch_documentation=1
-
-"Move the preview window (code documentation) to the bottom of the screen, so it doesn't move the code!
-"You might also want to look at the echodoc plugin
-set splitbelow
-
-nnoremap <F5> :wa!<cr>:OmniSharpBuild<cr>
-" Builds can run asynchronously with vim-dispatch installed
-"nnoremap <F5> :wa!<cr>:OmniSharpBuildAsync<cr>
-
-"The following commands are contextual, based on the current cursor position.
-
-nnoremap <F12> :OmniSharpGotoDefinition<cr>
-nnoremap gd :OmniSharpGotoDefinition<cr>
-nnoremap <leader>fi :OmniSharpFindImplementations<cr>
-nnoremap <leader>ft :OmniSharpFindType<cr>
-nnoremap <leader>fs :OmniSharpFindSymbol<cr>
-nnoremap <leader>fu :OmniSharpFindUsages<cr>
-nnoremap <leader>fm :OmniSharpFindMembersInBuffer<cr>
-nnoremap <leader>tt :OmniSharpTypeLookup<cr>
-nnoremap <leader>dc :OmniSharpDocumentation<cr>
-"show type information automatically when the cursor stops moving
-autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
-set updatetime=500
-set cmdheight=2
-"I find contextual code actions so useful that I have it mapped to the spacebar
-nnoremap <space> :OmniSharpGetCodeActions<cr>
-
-" rename with dialog
-nnoremap <leader>nm :OmniSharpRename<cr>
-nnoremap <F2> :OmniSharpRename<cr>      
-" rename without dialog - with cursor on the symbol to rename... ':Rename newname'
-command! -nargs=1 Rename :call OmniSharp#RenameTo("<args>")
-
-" Force OmniSharp to reload the solution. Useful when switching branches etc.
-nnoremap <leader>rl :OmniSharpReloadSolution<cr>
-nnoremap <leader>cf :OmniSharpCodeFormat<cr>
-" Load the current .cs file to the nearest project
-nnoremap <leader>tp :OmniSharpAddToProject<cr>
-" Automatically add new cs files to the nearest project on save
-autocmd BufWritePost *.cs call OmniSharp#AddToProject()
-" (Experimental - uses vim-dispatch or vimproc plugin) - Start the omnisharp server for the current solution
-nnoremap <leader>ss :OmniSharpStartServer<cr>
-nnoremap <leader>sp :OmniSharpStopServer<cr>
-
-" Add syntax highlighting for types and interfaces
-nnoremap <leader>th :OmniSharpHighlightTypes<cr>
-"Don't ask to save when changing buffers (i.e. when jumping to a type definition)
-set hidden
-
-let g:Omnisharp_start_server=0
-let g:Omnisharp_stop_server=0
-
-" ctrlp
+" PLUGIN: ctrlp
 let g:ctrlp_by_filename = 1
 let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:12'
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*        " Linux/MacOSX
 
-" make status line always show for airline
-set ls=2
-
-" syntastic: C++11 support
+" PLUGIN: syntastic
 let g:syntastic_cpp_compiler_options = ' -std=c++11'
 " syntastic: C++11 support (clang)
 "let g:syntastic_cpp_compiler = 'clang++'
 "let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
-"
-runtime! macros/matchit.vim
 
-" airline
+" PLUGIN: airline
 let g:airline#extensions#tabline#enabled = 1
 
-set hls
-
-" some custom commands/macros for Ag
+" PLUGIN: Ag
 command! -nargs=+ Agweb :Ag -G '.*\.js$|.*\.ts$|.*\.html$' <args>
 command! -nargs=+ Agcs :Ag -G '.*\.cs$' <args>
 
-" UntiSnips
+" PLUGIN: UntiSnips
 " <tab> is already used by YCM
 let g:UltiSnipsExpandTrigger="<c-j>"
 
-" YouCompleteMe
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+" PLUGIN: YouCompleteMe
+"let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 
-" typescript-tools.vim
+" PLUGIN: typescript-tools.vim
 "let g:TSS = ['tsserver']
