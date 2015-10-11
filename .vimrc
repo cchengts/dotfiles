@@ -105,7 +105,6 @@ endif
 
 
 " SETUP COLORS
-set t_Co=256
 if &term =~ "rxvt"
     if has("terminfo")
         set t_Co=8
@@ -124,6 +123,7 @@ elseif has('win32') && !has('gui_running') && !empty($CONEMUBUILD)
     let &t_AF="\e[38;5;%dm"
     color jellybeans
 endif
+set t_Co=256
 if has("gui_running")
 "    color solarized
 "    set bg=dark
