@@ -34,14 +34,14 @@ Plugin 'Quramy/tsuquyomi'
 Plugin 'clausreinke/typescript-tools.vim'
 Plugin 'nelstrom/vim-visual-star-search'
 Plugin 'sheerun/vim-polyglot'
-Plugin 'ervandew/supertab'
+"Plugin 'ervandew/supertab'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'jonathanfilip/vim-lucius'
 Plugin 'ciaranm/inkpot'
 "gitgutter runs a script for every cursor move
 "Plugin 'airblade/vim-gitgutter'
 Plugin 'gregsexton/gitv'
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 " Adds better support for Javascript in tagbar. Additional steps: 
 "   'npm install' in .vim/bundle/tern_for_vim
 "   npm install -g git://github.com/ramitos/jsctags.git
