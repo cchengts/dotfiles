@@ -30,7 +30,8 @@ Plugin 'rking/ag.vim'
 Plugin 'Shougo/unite.vim'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'Shougo/vimproc.vim'
-Plugin 'Quramy/tsuquyomi'
+" tsuquyomi rebinds <C-^>
+"Plugin 'Quramy/tsuquyomi'
 Plugin 'clausreinke/typescript-tools.vim'
 Plugin 'nelstrom/vim-visual-star-search'
 Plugin 'sheerun/vim-polyglot'
@@ -45,7 +46,7 @@ Plugin 'Valloric/YouCompleteMe'
 " Adds better support for Javascript in tagbar. Additional steps: 
 "   'npm install' in .vim/bundle/tern_for_vim
 "   npm install -g git://github.com/ramitos/jsctags.git
-Plugin 'marijnh/tern_for_vim'
+"Plugin 'marijnh/tern_for_vim'
 Plugin 'JavaScript-Indent'
 Plugin 'lokaltog/vim-easymotion'
 
