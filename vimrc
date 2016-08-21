@@ -2,7 +2,7 @@
 " install with: git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 set nocompatible
 filetype off
-if !has('win32')
+if has('win32')
     set rtp+=~/vimfiles/bundle/Vundle.vim
 else
     set rtp+=~/.vim/bundle/Vundle.vim
@@ -17,7 +17,7 @@ Plugin 'L9'
 "Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'elzr/vim-json'
 Plugin 'tpope/vim-surround'
-Plugin 'ctrlp/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdcommenter'
