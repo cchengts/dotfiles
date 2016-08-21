@@ -2,7 +2,11 @@
 " install with: git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
+if !has('win32')
+    set rtp+=~/vimfiles/bundle/Vundle.vim
+else
+    set rtp+=~/.vim/bundle/Vundle.vim
+endif
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
@@ -13,7 +17,7 @@ Plugin 'L9'
 "Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'elzr/vim-json'
 Plugin 'tpope/vim-surround'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlp/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdcommenter'
@@ -49,6 +53,10 @@ Plugin 'Valloric/YouCompleteMe'
 "Plugin 'marijnh/tern_for_vim'
 Plugin 'JavaScript-Indent'
 Plugin 'lokaltog/vim-easymotion'
+"Plugin 's3rvac/autofec'
+Plugin 'morhetz/gruvbox'
+Plugin 'jason0x43/vim-js-indent'
+Plugin 'othree/html5.vim' " for indenting HTML5 custom elements
 
 " Vundle finish
 call vundle#end()
@@ -131,6 +139,7 @@ if has("gui_running")
 "    color solarized
 "    set bg=dark
     color desert
+    set lines=999 columns=999
 elseif &term=='xterm-256color' || &term=='rxvt-unicode-256color'
 "    set bg=dark
 "    let g:solarized_termcolors=256
@@ -152,6 +161,11 @@ let g:SuperTabMappingBackward = '<s-c-space>'
 " PLUGIN: ctrlp
 let g:ctrlp_by_filename = 1
 let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:12'
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/node_modules/*
+let g:ctrlp_custom_ignore = 'bin/'
+let g:ctrlp_custom_max_files = 20000
+let g:ctrlp_max_depth = 50
+let g:ctrlp_clear_cache_on_exit = 0
 
 " PLUGIN: syntastic
 let g:syntastic_cpp_compiler_options = ' -std=c++11'
