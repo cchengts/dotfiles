@@ -1,6 +1,9 @@
 dotvim
 ======
-Install Vundle with:
-> git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+Clone the repo.
+
+    git clone --recursive git@github.com:cchengts/dotvim.git
+    ln -s dotvim .vim
 
 Open Vim and type ":PluginInstall" to install plugins.
