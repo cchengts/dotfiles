@@ -1,9 +1,9 @@
-dotvim
+Configuration Files
 ======
 
-Clone the repo.
+One place to store my config files.
 
-    git clone --recursive git@github.com:cchengts/dotvim.git
-    ln -s dotvim .vim
+Use `git clone --recursive https://github/...` or `git submodule update --init` to get the submodules as well.
 
-Open Vim and type ":PluginInstall" to install plugins.
+TODO:
+- Add a setup script.
