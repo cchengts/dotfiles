@@ -1,3 +1,31 @@
+" TODO
+" - messy and out of sync
+" - remove unused plugins
+" - use Ack instead of Ag
+" - configure ctrlp user command
+" - configure ycm
+
+set pythondll=C:/Windows/System32/python27.dll
+set pythonthreedll=C:/Program\ Files/Python36/python36.dll
+
+python3 << EOF
+import os
+import re
+path = os.environ['PATH'].split(';')
+
+def contains_msvcr_lib(folder):
+    try:
+        for item in os.listdir(folder):
+            if re.match(r'msvcr\d+\.dll', item):
+                return True
+    except:
+        pass
+    return False
+
+path = [folder for folder in path if not contains_msvcr_lib(folder)]
+os.environ['PATH'] = ';'.join(path)
+EOF
+
 " Vundle
 " install with: git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 set nocompatible
@@ -21,42 +49,54 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'terryma/vim-multiple-cursors'
+"Plugin 'terryma/vim-multiple-cursors'
 Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'sirver/ultisnips'
 Plugin 'honza/vim-snippets'
 " Plugin 'file:///home/gmarik/path/to/plugin'
-Plugin 'mattn/emmet-vim'
+" emmet causes C-y to get stuck
+"Plugin 'mattn/emmet-vim'
 Plugin 'taglist.vim'
 Plugin 'majutsushi/tagbar'
-"Plugin 'mileszs/ack.vim'
-Plugin 'rking/ag.vim'
+Plugin 'mileszs/ack.vim'
 Plugin 'Shougo/unite.vim'
 Plugin 'leafgarland/typescript-vim'
-Plugin 'Shougo/vimproc.vim'
+"Plugin 'Shougo/vimproc.vim'
 " tsuquyomi rebinds <C-^>
 "Plugin 'Quramy/tsuquyomi'
 Plugin 'clausreinke/typescript-tools.vim'
 Plugin 'nelstrom/vim-visual-star-search'
-Plugin 'sheerun/vim-polyglot'
+Plugin 'sheerun/vim-polyglot' " Language pack
 "Plugin 'ervandew/supertab'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'jonathanfilip/vim-lucius'
-Plugin 'ciaranm/inkpot'
-"gitgutter runs a script for every cursor move
+"Plugin 'jiangmiao/auto-pairs'
+" gitgutter runs a script for every cursor move
+" git gutter is not working anymore...
 "Plugin 'airblade/vim-gitgutter'
 Plugin 'gregsexton/gitv'
 Plugin 'Valloric/YouCompleteMe'
 " Adds better support for Javascript in tagbar. Additional steps: 
 "   'npm install' in .vim/bundle/tern_for_vim
 "   npm install -g git://github.com/ramitos/jsctags.git
-"Plugin 'marijnh/tern_for_vim'
+"Plugin 'ternjs/tern_for_vim'
 Plugin 'JavaScript-Indent'
 Plugin 'lokaltog/vim-easymotion'
 "Plugin 's3rvac/autofec'
-Plugin 'morhetz/gruvbox'
 Plugin 'jason0x43/vim-js-indent'
 Plugin 'othree/html5.vim' " for indenting HTML5 custom elements
+Plugin 'Raimondi/delimitMate' " autocomplete quotes, parens, brackets, ...
+Plugin 'haya14busa/incsearch.vim' " highlights regex search as you type
+Plugin 'haya14busa/incsearch-easymotion.vim'
+Plugin 'mhinz/vim-signify' " gutter diff sings for VCSs other than git
+
+" Color schemes
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'jonathanfilip/vim-lucius'
+Plugin 'ciaranm/inkpot'
+Plugin 'sjl/badwolf'
+Plugin 'tomasr/molokai'
+Plugin 'morhetz/gruvbox'
+Plugin 'nanotech/jellybeans.vim'
 
 " Vundle finish
 call vundle#end()
@@ -72,6 +112,21 @@ call vundle#end()
 
 
 " My VIM settings
+set nocp
+if &term =~ "rxvt"
+    if has("terminfo")
+        set t_Co=8
+        set t_Sf=[3%p1%dm
+        set t_Sb=[4%p1%dm
+    else
+        set t_Co=8
+        set t_Sf=[3%dm
+        set t_Sb=[4%dm
+    endif
+endif
+set t_Co=256
+"set t_AB=[48;5;%dm
+"set t_AF=[38;5;%dm
 syntax on
 filetype plugin indent on
 runtime! macros/matchit.vim
@@ -160,7 +215,7 @@ let g:SuperTabMappingBackward = '<s-c-space>'
 
 " PLUGIN: ctrlp
 let g:ctrlp_by_filename = 1
-let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:12'
+let g:ctrlp_match_window = 'bottom,order:ttb,min:3,max:12'
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/node_modules/*
 let g:ctrlp_custom_ignore = 'bin/'
 let g:ctrlp_custom_max_files = 20000
@@ -175,6 +230,9 @@ let g:syntastic_cpp_compiler_options = ' -std=c++11'
 
 " PLUGIN: airline
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme = 'dark'
+" make status line always show for airline
+set ls=2
 
 " PLUGIN: Ag
 command! -nargs=+ Agweb :Ag -G '.*\.js$|.*\.ts$|.*\.html$' <args>
