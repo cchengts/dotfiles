@@ -5,26 +5,28 @@
 " - configure ctrlp user command
 " - configure ycm
 
-set pythondll=C:/Windows/System32/python27.dll
-set pythonthreedll=C:/Program\ Files/Python36/python36.dll
+if has('win32')
+    set pythondll=C:/Windows/System32/python27.dll
+    set pythonthreedll=C:/Program\ Files/Python36/python36.dll
 
-python3 << EOF
-import os
-import re
-path = os.environ['PATH'].split(';')
-
-def contains_msvcr_lib(folder):
+    python3 << EOF
+    import os
+    import re
+    path = os.environ['PATH'].split(';')
+    
+    def contains_msvcr_lib(folder):
     try:
         for item in os.listdir(folder):
-            if re.match(r'msvcr\d+\.dll', item):
-                return True
+    	if re.match(r'msvcr\d+\.dll', item):
+    	    return True
     except:
         pass
     return False
-
-path = [folder for folder in path if not contains_msvcr_lib(folder)]
-os.environ['PATH'] = ';'.join(path)
+    
+    path = [folder for folder in path if not contains_msvcr_lib(folder)]
+    os.environ['PATH'] = ';'.join(path)
 EOF
+endif
 
 " Vundle
 " install with: git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
