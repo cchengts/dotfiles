@@ -3,19 +3,19 @@
 [alias]
     l = log --graph -n5
     ll = log --pretty=oneline --graph --all
-	co = checkout
-	ci = commit
-	st = status
-	br = branch
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
     df = diff --color-words -w --ignore-space-at-eol
     dfo = diff --color-words -w --ignore-space-at-eol origin
     dfc = diff --cached --color-words -w --ignore-space-at-eol
     dfcm = diff --cached --color-words -w --ignore-space-at-eol origin/master
     dfcc = diff --cached --color-words --word-diff-regex=. -w --ignore-space-at-eol
-	meld = difftool -tool meld -y
-	tp = tfs
-	cleanall = clean -fdx :/
-	cleanalle = clean -fdx :/ -e node_modules
+    meld = difftool -tool meld -y
+    tp = tfs
+    cleanall = clean -fdx :/
+    cleanalle = clean -fdx :/ -e node_modules
     dt = difftool -y
     mtvs = mergetool --tool=vs -y
     dtvs = difftool --tool=vs -y
@@ -28,33 +28,33 @@
     pom = pull origin master
     name = symbolic-ref --short HEAD
 [core]
-	excludesfile = ~/.config/git/ignore
+    excludesfile = ~/.config/git/ignore
 [diff]
 #    tool = vsdiffmerge
     tool = bc
 [merge]
-	tool = vsdiffmerge
+    tool = vsdiffmerge
 [difftool]
-	prompt = true
+    prompt = true
 [mergetool]
-	prompt = true
+    prompt = true
 [difftool "bc"]
-	path = C:\\Program Files\\Beyond Compare 4\\BComp.exe
+    path = C:\\Program Files\\Beyond Compare 4\\BComp.exe
 [mergetool "bc"]
-	path = C:\\Program Files\\Beyond Compare 4\\BComp.exe
+    path = C:\\Program Files\\Beyond Compare 4\\BComp.exe
 [difftool "vs"]
-	cmd = '"C:/Program Files (x86)/Microsoft Visual Studio 12.0/Common7/IDE/vsDiffMerge.exe"' "$LOCAL" "$REMOTE" //t
+    cmd = '"C:/Program Files (x86)/Microsoft Visual Studio 12.0/Common7/IDE/vsDiffMerge.exe"' "$LOCAL" "$REMOTE" //t
     keepbackup = false
     trustexitcode = true
 [mergetool "vs"]
-	cmd = '"C:/Program Files (x86)/Microsoft Visual Studio 12.0/Common7/IDE/vsDiffMerge.exe"' "$REMOTE" "$LOCAL" "$BASE" "$MERGED" //m
+    cmd = '"C:/Program Files (x86)/Microsoft Visual Studio 12.0/Common7/IDE/vsDiffMerge.exe"' "$REMOTE" "$LOCAL" "$BASE" "$MERGED" //m
     keepbackup = false
     trustexitcode = true
 [difftool "vsdiffmerge"]
-	cmd = \"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\vsdiffmerge.exe\" \"$LOCAL\" \"$REMOTE\" //t
-	keepbackup = false
-	trustexitcode = true
+    cmd = \"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\vsdiffmerge.exe\" \"$LOCAL\" \"$REMOTE\" //t
+    keepbackup = false
+    trustexitcode = true
 [mergetool "vsdiffmerge"]
-	cmd = \"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\vsdiffmerge.exe\" \"$REMOTE\" \"$LOCAL\" \"$BASE\" \"$MERGED\" //m
-	trustexitcode = true
-	keepbackup = false
+    cmd = \"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\vsdiffmerge.exe\" \"$REMOTE\" \"$LOCAL\" \"$BASE\" \"$MERGED\" //m
+    trustexitcode = true
+    keepbackup = false
