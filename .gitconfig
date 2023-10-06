@@ -1,43 +1,52 @@
 [push]
     default = simple
 [alias]
-    l = log --graph -n5
-    ll = log --pretty=oneline --graph --all
-    co = checkout
-    ci = commit
-    st = status
     br = branch
-    df = diff --color-words -w --ignore-space-at-eol
-    dfo = diff --color-words -w --ignore-space-at-eol origin
-    dfc = diff --cached --color-words -w --ignore-space-at-eol
-    dfcm = diff --cached --color-words -w --ignore-space-at-eol origin/master
-    dfcc = diff --cached --color-words --word-diff-regex=. -w --ignore-space-at-eol
-    meld = difftool -tool meld -y
-    tp = tfs
+    ci = commit
     cleanall = clean -fdx :/
     cleanalle = clean -fdx :/ -e node_modules
+    co = checkout
+    df = diff --color-words -w --ignore-space-at-eol
+    dfc = diff --cached --color-words -w --ignore-space-at-eol
+    dfcc = diff --cached --color-words --word-diff-regex=. -w --ignore-space-at-eol
+    dfcm = diff --cached --color-words -w --ignore-space-at-eol origin/master
+    dfo = diff --color-words -w --ignore-space-at-eol origin
     dt = difftool -y
-    mtvs = mergetool --tool=vs -y
-    dtvs = difftool --tool=vs -y
-    mtbc = mergetool --tool=bc -y
     dtbc = difftool --tool=bc -y
-    mtkd = mergetool --tool=kdiff3 --no-prompt
     dtkd = difftool --tool=kdiff3 --no-prompt
     dtkdc = difftool --tool=kdiff3 --no-prompt --cached
+    dtvs = difftool --tool=vs -y
+    l = log --graph -n5
+    ll = log --pretty=oneline --graph --all
     loghere = log --no-merges --first-parent
-    pom = pull origin master
+    meld = difftool -tool meld -y
+    mergedmain = merge-base origin/main HEAD
+    mtbc = mergetool --tool=bc -y
+    mtkd = mergetool --tool=kdiff3 --no-prompt
+    mtvs = mergetool --tool=vs -y
     name = symbolic-ref --short HEAD
+    pom = pull origin master
+    rb = for-each-ref --sort=-committerdate --count=10 --format='%(refname:short)' refs/heads/
+    st = status
+    tp = tfs
 [core]
     excludesfile = ~/.config/git/ignore
+    autocrlf = input
 [diff]
 #    tool = vsdiffmerge
     tool = bc
 [merge]
-    tool = vsdiffmerge
+    #tool = vsdiffmerge
+    tool = kdiff3
 [difftool]
     prompt = true
 [mergetool]
     prompt = true
+    keepBackup = false
+[mergetool "code"]
+    cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED
+[difftool "vscode"]
+    cmd = code --wait --diff $LOCAL $REMOTE
 [difftool "bc"]
     path = C:\\Program Files\\Beyond Compare 4\\BComp.exe
 [mergetool "bc"]
@@ -58,3 +67,5 @@
     cmd = \"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\vsdiffmerge.exe\" \"$REMOTE\" \"$LOCAL\" \"$BASE\" \"$MERGED\" //m
     trustexitcode = true
     keepbackup = false
+[color "diff"]
+    whitespace = red reverse
